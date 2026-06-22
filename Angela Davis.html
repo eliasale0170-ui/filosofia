@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angela Davis: Mujeres, Raza y Clase - Análisis Filosófico</title>
+    <!-- Fuentes Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --color-cream-bg: #FCF6EC;
+            --color-cream-dark: #F3EAE0;
+            --color-charcoal: #1A1A1A;
+            --color-terracotta: #A33B26;
+            --color-sage: #4A5A4E;
+        }
+
+        body {
+            background-color: #0f172a;
+            font-family: 'Lora', serif;
+            color: var(--color-charcoal);
+        }
+
+        /* Contenedor estricto para simular diapositivas de 1280x720 */
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: var(--color-cream-bg);
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            margin: 30px auto;
+        }
+
+        /* Decoración de fondo de estilo editorial */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(163, 59, 38, 0.04) 0%, rgba(252, 246, 236, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .slide-container::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: 60px;
+            width: 80px;
+            height: 3px;
+            background-color: var(--color-terracotta);
+            z-index: 0;
+        }
+
+        .slide-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Jerarquía Tipográfica */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .slide-title {
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--color-charcoal);
+            margin-bottom: 24px;
+            position: relative;
+            padding-bottom: 8px;
+            width: 100%;
+            border-bottom: 2px solid rgba(163, 59, 38, 0.15);
+        }
+
+        .slide-title span {
+            color: var(--color-terracotta);
+        }
+
+        /* Tarjetas de Contenido Estilo Fichas de Lectura */
+        .academic-card {
+            background-color: var(--color-cream-dark);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-terracotta);
+            transition: all 0.3s ease;
+        }
+
+        .academic-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(163, 59, 38, 0.05);
+        }
+    </style>
+
+    <script>
+        // Sistema failsafe para imágenes locales caídas
+        function handleImageError(img, fallbackType) {
+            console.warn("Failsafe activado para imagen:", fallbackType);
+            const container = img.parentElement;
+            img.style.display = 'none';
+            
+            let htmlContent = '';
+            if (fallbackType === 'libro') {
+                htmlContent = `
+                    <div class="w-full h-full flex flex-col justify-center items-center bg-[#A33B26] text-[#FCF6EC] p-8 text-center rounded-r-lg">
+                        <i class="fa-solid fa-book-open text-7xl mb-4 opacity-90"></i>
+                        <p class="font-serif text-2xl italic font-bold">Mujeres, raza y clase</p>
+                        <p class="font-sans text-xs uppercase tracking-widest mt-2 opacity-75">Angela Y. Davis (1981)</p>
+                    </div>
+                `;
+            } else if (fallbackType === 'praxis') {
+                htmlContent = `
+                    <div class="w-full h-full flex flex-col justify-center items-center bg-[#4A5A4E] text-[#FCF6EC] p-8 text-center rounded-r-lg">
+                        <i class="fa-solid fa-hands-holding-circle text-7xl mb-4 opacity-90"></i>
+                        <p class="font-serif text-2xl italic font-bold">La Praxis del Cuerpo</p>
+                        <p class="font-sans text-xs uppercase tracking-widest mt-2 opacity-75">Ontología del trabajo forzado</p>
+                    </div>
+                `;
+            } else if (fallbackType === 'sojourner') {
+                htmlContent = `
+                    <div class="w-full h-full flex flex-col justify-center items-center bg-[#1A1A1A] text-[#FCF6EC] p-8 text-center rounded-r-lg">
+                        <i class="fa-solid fa-quote-left text-7xl mb-4 text-[#A33B26]"></i>
+                        <p class="font-serif text-2xl italic font-bold">"¿Acaso no soy una mujer?"</p>
+                        <p class="font-sans text-xs uppercase tracking-widest mt-2 opacity-75">Sojourner Truth • Akron, 1851</p>
+                    </div>
+                `;
+            }
+            
+            const fallbackDiv = document.createElement('div');
+            fallbackDiv.className = 'w-full h-full min-h-[350px] flex items-center justify-center';
+            fallbackDiv.innerHTML = htmlContent;
+            container.appendChild(fallbackDiv);
+        }
+    </script>
+</head>
+<body class="py-10">
+
+    <!-- DIAPOSITIVA 1: Portada Conceptual (Filosofía Crítica) -->
+    <div class="slide-container justify-between items-center text-center" id="slide1" style="background: linear-gradient(135deg, #FCF6EC 0%, #F3EAE0 100%);">
+        <div class="my-auto">
+            <span class="font-sans text-xs uppercase tracking-[0.25em] text-[#A33B26] font-bold">Unidad 4 • Problemática Filosófica de la Emancipación</span>
+            <h1 class="text-6xl font-bold my-4 leading-tight">Deconstruyendo la <span class="text-[#A33B26]">"Feminidad"</span></h1>
+            <p class="text-2xl italic text-[#4A4A4A] max-w-4xl mx-auto mb-8">Raza, Clase y Género como Categorías de Constitución Ontológica</p>
+            <div class="w-40 h-[3px] bg-[#A33B26] mx-auto mb-8"></div>
+            <p class="font-sans text-sm text-[#4A5A4E] font-semibold tracking-wider">Un análisis crítico de la obra de Angela Davis</p>
+        </div>
+    </div>
+
+    <!-- DIAPOSITIVA 2: Definición de la Problemática Filosófica -->
+    <div class="slide-container" id="slide2">
+        <h2 class="slide-title">La Problemática Filosófica: <span>Ontología de la Exclusión</span></h2>
+        <div class="grid grid-cols-12 gap-8 flex-grow items-center">
+            <div class="col-span-7 flex flex-col gap-6">
+                <div class="academic-card p-6">
+                    <h3 class="text-xl font-bold text-[#A33B26] mb-2">La Trampa del Esencialismo</h3>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        El feminismo burgués del siglo XIX definió el ser "Mujer" bajo atributos esenciales como la <strong>delicadeza, la sumisión doméstica y la pureza moral</strong>. Davis deconstruye este universalismo revelando que estas características dependían de una estructura material e imperialista de exclusión.
+                    </p>
+                </div>
+                <div class="academic-card p-6">
+                    <h3 class="text-xl font-bold text-[#4A5A4E] mb-2">La Interseccionalidad como Filosofía Política</h3>
+                    <p class="text-base text-gray-700 leading-relaxed">
+                        ¿Cómo operan los sistemas de dominación? No se trata de opresiones acumulativas, sino de <strong>fuerzas constitutivas</strong>. La raza y la clase no "adornan" el género: reconfiguran ontológicamente el estatus de la humanidad de los sujetos.
+                    </p>
+                </div>
+            </div>
+            <div class="col-span-5 h-[400px]">
+                <div class="w-full h-full rounded-lg overflow-hidden shadow-md relative bg-gray-100">
+                    <img class="w-full h-full object-cover" alt="Portada del libro Mujeres, Raza y Clase" src="angela1.jpg" onerror="handleImageError(this, 'libro')">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DIAPOSITIVA 3: La Paradoja de la Esclava como "Unidad de Trabajo" -->
+    <div class="slide-container" id="slide3">
+        <h2 class="slide-title">La Deshumanización del Cuerpo: <span>La Des-generización</span></h2>
+        <div class="grid grid-cols-12 gap-8 flex-grow items-center">
+            <div class="col-span-5 h-[400px]">
+                <div class="w-full h-full rounded-lg overflow-hidden shadow-md relative bg-gray-100">
+                    <img class="w-full h-full object-cover" alt="Esclavitud y trabajo forzado conceptual" src="carcel.jpg" onerror="handleImageError(this, 'praxis')">
+                </div>
+            </div>
+            <div class="col-span-7 flex flex-col gap-5 justify-center">
+                <h3 class="text-2xl font-bold text-[#A33B26]">La Paradoja del Estatus de Género</h3>
+                <p class="text-lg leading-relaxed text-gray-700">
+                    Bajo el sistema esclavista, el cuerpo de la mujer negra sufrió una <strong>violencia de des-generización</strong>:
+                </p>
+                <ul class="list-none pl-0 flex flex-col gap-3">
+                    <li class="relative pl-6 text-base text-gray-700">
+                        <span class="absolute left-0 text-[#A33B26]"><i class="fa-solid fa-angle-right"></i></span>
+                        <strong>Unidad de Trabajo:</strong> En los campos de algodón eran tratadas como "bienes muebles" desprovistos de género, trabajando de sol a sol bajo el azote del látigo en igualdad con los hombres.
+                    </li>
+                    <li class="relative pl-6 text-base text-gray-700">
+                        <span class="absolute left-0 text-[#A33B26]"><i class="fa-solid fa-angle-right"></i></span>
+                        <strong>Explotación Específica:</strong> Al mismo tiempo, su rol reproductor las valoraba como "paridoras" de mano de obra y sus cuerpos eran territorios de castigo a través de la violencia sexual institucionalizada.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- DIAPOSITIVA 4: La Praxis de la Igualdad Doméstica -->
+    <div class="slide-container" id="slide4">
+        <h2 class="slide-title">La Praxis de la <span>Igualdad Doméstica</span></h2>
+        <div class="grid grid-cols-2 gap-8 flex-grow items-center">
+            <div class="academic-card p-8 h-full flex flex-col justify-center">
+                <h3 class="text-2xl font-bold text-[#A33B26] mb-4">El Único Espacio Autónomo</h3>
+                <p class="text-lg leading-relaxed text-gray-700">
+                    En las chozas de las plantaciones, donde el opresor no podía reclamar la plusvalía del trabajo doméstico de forma inmediata, se gestó un milagro social. El trabajo reproductivo (cocinar, zurcir, curar) no era opresivo, sino la <strong>única labor con significado humano real</strong> para la supervivencia comunitaria.
+                </p>
+            </div>
+            <div class="academic-card p-8 h-full flex flex-col justify-center" style="border-left-color: var(--color-sage);">
+                <h3 class="text-2xl font-bold text-[#4A5A4E] mb-4">División del Trabajo Horizontal</h3>
+                <p class="text-lg leading-relaxed text-gray-700">
+                    Dado que el dominio masculino estaba desautorizado por el amo (pues todos eran iguales bajo el látigo), los hombres y mujeres esclavos forjaron una <strong>división del trabajo horizontal y no jerárquica</strong>. Se transformó la "igualdad negativa" de la opresión en una "igualdad positiva" de resistencia afectiva.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- DIAPOSITIVA 5: El Movimiento Antiesclavista y el Nacimiento del Feminismo -->
+    <div class="slide-container" id="slide5">
+        <h2 class="slide-title">El Espejo de la Opacidad: <span>Feminismo vs. Esclavitud</span></h2>
+        <div class="grid grid-cols-12 gap-8 flex-grow items-center">
+            <div class="col-span-7 flex flex-col gap-5">
+                <h3 class="text-2xl font-bold text-[#A33B26]">La Metáfora de la Esclavitud</h3>
+                <p class="text-base text-gray-700 leading-relaxed">
+                    Las mujeres blancas de clase media en el siglo XIX comenzaron a conceptualizar su propia opresión doméstica utilizando el término <strong>"esclavitud"</strong>. Esta analogía lingüística fue útil para movilizar la conciencia colectiva, pero albergaba un profundo sesgo epistémico.
+                </p>
+                <div class="tiled-box bg-[#F3EAE0] p-5 rounded border-l-4 border-[#A33B26]">
+                    <p class="text-sm italic text-gray-600">
+                        Equiparar el matrimonio burgués con las plantaciones invisibilizaba que el ocio doméstico y el estatus civil de la mujer blanca estaban materialmente subsidiados por la absoluta expropiación económica de la mujer negra y obrera.
+                    </p>
+                </div>
+            </div>
+            <div class="col-span-5 h-[400px]">
+                <div class="w-full h-full rounded-lg overflow-hidden shadow-md relative bg-gray-100">
+                    <img class="w-full h-full object-cover" alt="Manifestación por los Derechos Civiles" src="marcha.jpg" onerror="handleImageError(this, 'sojourner')">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DIAPOSITIVA 6: El Giro Epistémico de Sojourner Truth -->
+    <div class="slide-container" id="slide6">
+        <h2 class="slide-title">El Giro Epistémico: <span>¿Acaso no soy una mujer?</span></h2>
+        <div class="flex-grow flex flex-col justify-center max-w-4xl mx-auto">
+            <div class="relative pl-12 pr-6">
+                <span class="text-8xl text-red-800/10 font-serif absolute -top-12 left-0 pointer-events-none">“</span>
+                <blockquote class="text-2xl font-serif italic text-gray-800 leading-relaxed mb-6">
+                    He arado, he sembrado y he cosechado en los graneros... ¿Y acaso no soy una mujer? Podía trabajar tanto como un hombre, y comer tanto como él cuando tenía comida... ¡y también soportar el látigo! ¿Y acaso no soy una mujer?
+                </blockquote>
+                <cite class="font-sans text-sm font-bold tracking-widest text-[#A33B26] uppercase">— Sojourner Truth, Akron (1851)</cite>
+            </div>
+            <div class="mt-8 border-t border-gray-300 pt-6">
+                <p class="text-base text-gray-700 leading-relaxed">
+                    Este discurso no es solo retórica emocional; es una **intervención deconstructiva**. Truth destruye el fundamento biológico de la fragilidad femenina de la época, demostrando que su cuerpo es simultáneamente "fuerte" para el trabajo y "sufriente" para el dolor, rompiendo el monopolio blanco de la feminidad.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- DIAPOSITIVA 7: Conclusión Filosófica y Cierre de la Ponencia -->
+    <div class="slide-container justify-between" id="slide7" style="background: linear-gradient(135deg, #FCF6EC 0%, #F3EAE0 100%);">
+        <div>
+            <h2 class="slide-title">Conclusión: <span>Hacia una Libertad Interseccional</span></h2>
+            <div class="grid grid-cols-3 gap-6 mt-8">
+                <div class="academic-card p-6">
+                    <div class="text-[#A33B26] text-3xl mb-3"><i class="fa-solid fa-arrows-split-up-and-left"></i></div>
+                    <h3 class="text-lg font-bold mb-2">Superar el Monolitismo</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        La libertad de las mujeres es una abstracción conceptual vacía si no desmantela de forma simultánea el racismo y la explotación capitalista.
+                    </p>
+                </div>
+                <div class="academic-card p-6" style="border-left-color: var(--color-sage);">
+                    <div class="text-[#4A5A4E] text-3xl mb-3"><i class="fa-solid fa-person-military-pointing"></i></div>
+                    <h3 class="text-lg font-bold mb-2">El Legado de la Fuerza</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Las mujeres negras legaron un modelo de feminidad basado en el trabajo duro, el tesón y la insistencia radical en la igualdad sexual.
+                    </p>
+                </div>
+                <div class="academic-card p-6" style="border-left-color: var(--color-charcoal);">
+                    <div class="text-[#1A1A1A] text-3xl mb-3"><i class="fa-solid fa-circle-nodes"></i></div>
+                    <h3 class="text-lg font-bold mb-2">Co-Constitutividad</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Las opresiones no se suman; actúan dialécticamente. La deconstrucción del poder exige atacar la raíz sistémica unificada.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-between items-center border-t border-gray-300 pt-4">
+            <span class="font-sans text-xs uppercase tracking-widest text-[#A33B26] font-semibold">Tesis de Licenciatura • Ponencia Grupal</span>
+            <span class="font-serif italic text-sm text-gray-500">"La libertad es un proceso de constante expansión"</span>
+        </div>
+    </div>
+
+</body>
+</html>
